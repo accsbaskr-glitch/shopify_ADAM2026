@@ -11,9 +11,8 @@ import {
 } from 'react-router';
 import favicon from '~/assets/favicon.svg';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
-import resetStyles from '~/styles/reset.css?url';
-import appStyles from '~/styles/app.css?url';
-import {PageLayout} from './components/PageLayout';
+import tailwindStyles from '~/styles/tailwind.css?url';
+import {RouteAwareLayout} from '~/components/layout/RouteAwareLayout';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -54,7 +53,21 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap',
+    },
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'stylesheet', href: tailwindStyles},
   ];
 }
 
@@ -150,12 +163,10 @@ export function Layout({children}) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="stylesheet" href={resetStyles}></link>
-        <link rel="stylesheet" href={appStyles}></link>
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="antialiased bg-background text-foreground font-sans">
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
@@ -178,9 +189,9 @@ export default function App() {
       shop={data.shop}
       consent={data.consent}
     >
-      <PageLayout {...data}>
+      <RouteAwareLayout>
         <Outlet />
-      </PageLayout>
+      </RouteAwareLayout>
     </Analytics.Provider>
   );
 }

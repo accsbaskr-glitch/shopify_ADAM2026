@@ -22,6 +22,10 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
+    styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+    imgSrc: ["'self'", 'https://res.cloudinary.com', 'https://media.istockphoto.com', 'data:'],
+    mediaSrc: ["'self'", 'https://www.pexels.com', 'data:'],
   });
 
   const body = await renderToReadableStream(

@@ -3,12 +3,14 @@ import {hydrogen} from '@shopify/hydrogen/vite';
 import {oxygen} from '@shopify/mini-oxygen/vite';
 import {reactRouter} from '@react-router/dev/vite';
 import {fileURLToPath} from 'node:url';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [hydrogen(), oxygen(), reactRouter()],
+  plugins: [hydrogen(), oxygen(), reactRouter(), tailwindcss()],
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./app', import.meta.url)),
+      '@': fileURLToPath(new URL('./app', import.meta.url)),
     },
   },
   build: {
